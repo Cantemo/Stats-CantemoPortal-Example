@@ -10,25 +10,25 @@
   "sharedCrosshair": true,
   "rows": [
     {
-      "title": "New row",
-      "height": "25px",
-      "editable": true,
       "collapse": false,
+      "editable": true,
+      "height": "25px",
       "panels": [
         {
-          "title": "Portal System Metrics",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "text",
-          "id": 38,
-          "mode": "markdown",
           "content": "# Welcome to the Cantemo Portal system metrics dashboard\n\nThis is an example dashboard showing some of the metrics which can be gathered from a portal system, to help you get a better overview of what is happening to the system and to help you identify an performance bottlenecks.\n\nFor more information on how to configure this dashboard, please see the Grafana docs available at [the grafana website](http://grafana.org/)\n",
-          "style": {},
+          "editable": true,
+          "error": false,
+          "height": "24",
+          "id": 38,
           "links": [],
-          "height": "24"
+          "mode": "markdown",
+          "span": 12,
+          "style": {},
+          "title": "Portal System Metrics",
+          "type": "text"
         }
-      ]
+      ],
+      "title": "New row"
     },
     {
       "collapse": false,
@@ -106,7 +106,7 @@
           "y-axis": true,
           "y_formats": [
             "short",
-            "short"
+            "ms"
           ]
         },
         {
@@ -180,6 +180,67 @@
             "short",
             "ms"
           ]
+        },
+        {
+          "title": "Celery task count",
+          "error": false,
+          "span": 6,
+          "editable": true,
+          "type": "graph",
+          "id": 40,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "rightLogBase": 1,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "targets": [
+            {
+              "target": "aliasByNode(stats.counters.portal.celery.portal.*.tasks.*.done.count, 5, 7)"
+            }
+          ],
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "links": []
         }
       ],
       "title": "Portal"
@@ -1162,7 +1223,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "target": "aliasByNode(stats.counters.$server.storage.fs.stat.count, 5)"
+              "target": "alias(stats.counters.$server.storage.fs.stat.count, 'stats/s')"
             }
           ],
           "timeFrom": null,
@@ -2189,7 +2250,7 @@
     }
   ],
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "templating": {
@@ -2199,7 +2260,8 @@
         "allFormat": "wildcard",
         "current": {
           "text": "portal",
-          "value": "portal"
+          "value": "portal",
+          "tags": []
         },
         "datasource": null,
         "includeAll": true,
@@ -2229,6 +2291,6 @@
   },
   "refresh": "30s",
   "schemaVersion": 6,
-  "version": 9,
+  "version": 13,
   "links": []
 }
