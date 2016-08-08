@@ -177,7 +177,7 @@ To enable RabbitMQ stats, you will have to install the management plugin into ra
 ```
 $ rabbitmq-plugins enable rabbitmq_management
 
-$ service rabbitmq restart
+$ service rabbitmq-server restart
 ```
 
 After this you should start seeing messages and memory usage appearing.
