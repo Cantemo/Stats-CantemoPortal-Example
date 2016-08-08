@@ -1,0 +1,20 @@
+version: '2'
+services:
+  grafana:
+    image: kamon/grafana_graphite
+    ports:
+      - '80:80'
+      - '81:81'
+      - '8125:8125'
+      - '8125:8125/udp'
+      - '8126:8126'
+    volumes:
+      - ./data/whisper:/opt/graphite/storage/whisper
+      - ./data/grafana:/opt/grafana/data
+      - ./log/graphite:/opt/graphite/storage/log
+  mkdir:
+    image: alpine:latest
+    volumes:
+      - ./data:/data
+      - ./log:/log
+    command: sh -c 'mkdir -p /data/whisper /data/elasticsearch /data/grafana /log/graphite /log/graphite/webapp /log/elasticsearch'
