@@ -133,7 +133,7 @@ diamond on a portal server, you first have to install some
 prerequisite software:
 
 ```
-$ yum install gcc python-setuptools python-devel
+$ yum install gcc python-setuptools python-devel postgresql-devel
 
 $ easy_install pip
 ```
@@ -141,7 +141,7 @@ $ easy_install pip
 After this, you can install Diamond using
 
 ```
-$ pip install diamond==4.0.41 statsd pyrabbit
+$ pip install diamond==4.0.41 statsd pyrabbit psycopg2
 ```
 
 
@@ -172,12 +172,19 @@ $ sed -i -e 's,False,True,' \
 
 This will enable the above metrics and will not require any configuration on a default portal install.
 
-To enable RabbitMQ stats, you will have to install the management plugin into rabbitmq using the command:
+To enable RabbtiMQ stats, you will have to install the management plugin into rabbitmq using the command:
 
 ```
 $ rabbitmq-plugins enable rabbitmq_management
 
 $ service rabbitmq-server restart
+```
+
+Add the following to /etc/diamond/collectors/RabbitMQCollector.conf and restart diamond
+
+```
+enabled = True
+host = localhost:15672
 ```
 
 After this you should start seeing messages and memory usage appearing.
